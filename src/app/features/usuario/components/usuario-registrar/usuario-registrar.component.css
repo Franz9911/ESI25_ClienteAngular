@@ -1,0 +1,37 @@
+
+mat-icon{
+    background: linear-gradient(45deg, rgb(168, 173, 223), rgba(0, 0, 255, 0.808));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.tarjeta{
+    border: 1px solid #faf6f6;
+    border-radius: 1rem;
+    background-image: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+    padding: 0.5rem;
+    min-width: 20rem;
+}
+
+.cabezeraTarjeta{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #166D9A;
+    font-size: 1.3rem;
+    padding-bottom: 1rem;   
+}
+
+.contenidoTarjeta{
+    width: 96%;
+    align-items: center;
+    align-content: center;
+    text-justify: distribute;
+    border-bottom: 4px solid transparent; /* Borde transparente */
+  border-image: linear-gradient(45deg, rgb(168, 173, 223), rgba(0, 0, 255, 0.808)) 1; /* Degradado de rojo a azul */
+}
+.item{
+    display: flex;
+    align-items: center;
+} 
+

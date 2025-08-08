@@ -1,0 +1,28 @@
+comandos de Angular 
+ng new <nombre del proyecto>
+ng serve --open
+//crear un component
+ng g c personas/persona-listar
+//crear un servicio
+ng g s personas/service/persona
+//crear una class
+ng g class personas/model/personaDto
+// crear un modulo con router
+ng g module features/usuario --route usuario --module app-routing
+
+//crear un component
+ng generate component features/usuario/components/usuario-listar
+#######configuracion de un servicio
+
+
+########usar un servicion en un modulo
+1: importar el servicio
+import { PersonaService } from 'src/app/personas/service/persona.service';
+2:agregarlo al constructor
+constructor(private personaService: PersonaService) { }
+3:llamarlo en el metodo
+this.personaService.getPersonas().subscribe((data) => {})
+
+
+//vericar nit 
+https://siat.impuestos.gob.bo/rnc/public/consultas-estado-nit

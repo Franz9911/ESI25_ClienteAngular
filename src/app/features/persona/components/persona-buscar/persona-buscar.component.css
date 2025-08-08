@@ -1,0 +1,87 @@
+.conten{
+    margin: 4px;
+    background: linear-gradient( 40deg,
+        rgba(252, 255, 254, 0.61),
+        rgba(77, 119, 134, 0.459)
+    );
+}
+input{
+    background: none;
+    border: none;
+    border-bottom: 2px solid rgba(62, 79, 85, 0.815);
+}
+.buscador{
+    display: flex;
+    flex-direction: row;
+    min-width: 200px;
+    max-width: 100%;
+}
+.titulo{    
+    width: 100%-0.4rem;
+    padding: 0.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: linear-gradient( 10deg,
+    rgba(32, 30, 67, 0.945) 50%,
+    rgba(88, 96, 110, 0.733)
+    );  
+    color: #ffffffe3;
+}
+.tablaBuscar{
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;       
+    background: #ffffff;
+    width: 80%;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.404);
+}
+.paginar{
+    padding-top: 0.3rem;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-evenly
+}
+
+
+.cancelarBtn{
+    background-color: rgba(250, 45, 9, 0.815);
+    text-align: center; 
+}
+th,td{
+    border-bottom:1px  solid #f2f2f2; ;
+    border-top: 1px solid #f2f2f2;;
+    padding: 0.2rem;
+    font-size: 0.8rem;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+
+.tablaBuscar tr:hover {
+    cursor: pointer;
+    background-color: #9a9da3b4;
+}
+th{
+    font-family: Arial, Helvetica, sans-serif;  
+    text-align: left;
+    background: linear-gradient(
+      to bottom,
+      rgba(13, 52, 150, 0.897),
+      rgba(0, 0, 0, 0.418)
+    );
+    color: rgb(245, 241, 241);
+}
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+/* Esto elimina el margen del contenedor */
+::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    background: #f0eeeea6;
+  }

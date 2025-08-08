@@ -1,0 +1,31 @@
+.titulo{    
+    width: 100%-0.4rem;
+    padding: 0.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: linear-gradient( 10deg,
+    rgba(32, 30, 67, 0.945) 50%,
+    rgba(88, 96, 110, 0.733)
+    );  
+    color: #ffffffe3;
+}
+.conten{
+    margin:4px;
+    color: rgba(28, 31, 56, 0.897);
+    background: linear-gradient( 40deg,
+        rgba(252, 255, 254, 0.61),
+        rgba(77, 119, 134, 0.459)
+    );
+}
+.cancelarBtn{
+    background-color: rgba(250, 45, 9, 0.815);
+    text-align: center; 
+}
+/* Esto elimina el margen del contenedor */
+::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    background: #f0eeeea6;
+}

@@ -1,0 +1,96 @@
+
+<div class="contenedor-N2-Fila">
+    <div class="titulo-N2">
+        <h2>Lista de Usuarios</h2>
+        <div>
+            <button class="btn btn-Confirmar primario ">
+            Nuevo Usuario
+            </button>
+            <mat-icon class="icono" (click)="ExportarPdf()">picture_as_pdf</mat-icon>
+            <mat-icon class="icono" (click)="exportarExcel()">view_list</mat-icon>
+        </div>      
+    </div>
+
+    <div class="contenedor-tablaFiltros">
+        <div>
+            <div class="summary" (click)="toggle()"> 
+                <span style="display:inline-flex;"> 
+                    <strong>Buscar</strong>
+                    <mat-icon>{{ isOpen ? 'cancel' : 'search' }}</mat-icon>
+                </span>
+            </div>
+            <div class="entradaFiltros" [ngClass]="{ 'open': isOpen, 'closed': !isOpen }">
+              nombre <input type="text" [(ngModel)]="nombre">
+              apellidos <input type="text" [(ngModel)]="apellidos">
+              estado <input type="text" [(ngModel)]="estado"><br>
+              rol <br> <input type="text" [(ngModel)]="rol"><br>
+              inicio <br><input type="date" [(ngModel)]="fechaInicio"><br>
+              fin <br><input type="date" [(ngModel)]="fechaFin">
+              <button (click)="buscar()">buscar</button>
+            </div>
+            
+        </div>
+        <div class="tablaPaginador">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" >
+                <!-- Definir las columnas -->
+                <ng-container matColumnDef="nombreU">
+                <th mat-header-cell *matHeaderCellDef> Usuario</th>
+                <td mat-cell *matCellDef="let element" class="filas"> {{element.nombreU}} </td>
+                </ng-container>
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef> Estado </th>
+                    <td mat-cell *matCellDef="let element" class="filas"> {{element.estado}} </td>
+                </ng-container>
+                <ng-container matColumnDef="fechaReg">
+                    <th mat-header-cell *matHeaderCellDef> fecha de registro </th>
+                    <td mat-cell *matCellDef="let element" class="filas"> {{element.fechaReg |date:'dd-MM-yyyy'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Nombre">
+                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                    <td mat-cell *matCellDef="let element" class="filas"> {{element.persona?.nombre|| ''}} </td>
+                </ng-container>
+                <ng-container matColumnDef="apellidos">
+                    <th mat-header-cell *matHeaderCellDef> Apellido </th>
+                    <td mat-cell *matCellDef="let element" class="filas"> {{element.persona?.apellidos || ''}} </td>
+                </ng-container>
+                <ng-container matColumnDef="rol">
+                    <th mat-header-cell *matHeaderCellDef> Rol </th>
+                    <td mat-cell *matCellDef="let element" class="filas"> {{element.rol || ''}} </td>
+                </ng-container>
+                <ng-container matColumnDef="tipoDoc">
+                    <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                    <td mat-cell *matCellDef="let element" class="filas"> {{element.persona?.tipoDoc || ''}} </td>
+                </ng-container>
+                <ng-container matColumnDef="numDoc">
+                    <th mat-header-cell *matHeaderCellDef> # Documento </th>
+                    <td mat-cell *matCellDef="let element" class="filas"> {{element.persona?.numDoc || ''}} </td>
+                </ng-container>
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef> acciones </th>
+                    <td mat-cell *matCellDef="let element" class="filas">
+                        <div class="iconSeg">
+                            <mat-icon class="icono">settings</mat-icon>
+                            <mat-icon class="icono"(click)="ConfirmaEliminarUsuario(element)" >cancel</mat-icon>
+                            <mat-icon class="icono">folder_open</mat-icon>
+                        </div>
+                        
+                    </td>
+                </ng-container>
+            
+            
+                <!-- Cabecera de la tabla -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <!-- Filas de la tabla -->
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table> 
+            <app-paginador
+            [totalItems]="totalItems"
+            [itemsPerPage]="datosporPagina"
+            [currentPage]="paginaActual"
+            [totalPages]="totalPaginas"
+            (pageChange)="cambiarPagina($event)"
+            (itemsPerPageChange)="cambiarDatosporPagina($event)">
+            </app-paginador>   
+        </div>
+    </div>      
+</div>

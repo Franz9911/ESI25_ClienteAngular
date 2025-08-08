@@ -1,1 +1,321 @@
-/* You can add global styles to this file, and also import other style files */
+body{   
+    background: linear-gradient( 40deg,
+        rgba(252, 255, 254, 0.61),
+        rgba(77, 119, 134, 0.459)
+    );
+    width: 100%-4px;
+    margin: 0;
+}
+
+h1,h2,h3, fieldset, label,button select,a,input,text,p,legend{
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgba(17, 22, 34, 0.874);     
+}
+.txtBlanco{
+    color: #EEEEEE;
+}
+h1{
+   font-size: 2rem; 
+}
+h2{
+    font-size: 1.7rem;
+}
+h3{
+    font-size: 1.4rem;
+}
+p,a{
+    font-size: 0.8rem;
+    
+}
+@media screen and (max-width: 700px) {
+    p,a,label {
+      font-size: 12px;
+    }
+    h1{
+        font-size: 3vw;
+    }
+    h2{
+        font-size: 2.7vw;
+    }
+    h3{
+        font-size: 2.4vw;
+    }
+    /**listar**/
+    .contenedor-N2-Fila {
+        overflow-x: auto;
+    }
+    .demo-table {
+        min-width: 90vw;
+    }
+    .cabeceraH2 {
+        justify-content: flex-start;
+    }
+    /**registrar**/
+    .contenedor-Form{
+        min-width: 90vw;
+        overflow-x: auto;
+    }
+    .contenedor-Formulario{
+        min-width: 90%;
+        margin-left: 0 !important;
+    }
+}
+/**iconos**/
+.icono{
+    font-size: 1.7rem;
+}
+.icono:hover{
+    font-size: 1.8rem;
+    color: cornflowerblue;  
+}
+.icono:active{
+    font-size: 1.4rem;
+    rotate: -10deg;
+}
+
+/** colores**/
+.primario{
+    background-color: aqua;
+}
+
+/**botones**/
+
+.btn-Confirmar{
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 62, 194, 0.874),
+        rgba(0, 0, 0, 0.545)
+      );
+    color: white; 
+    border: none; 
+    padding: 10px 25px;
+    border-radius: 5px; 
+}
+.btn-cancelar{
+    background: linear-gradient(
+        to bottom,
+        rgba(61, 66, 56, 0.585),
+        rgba(0, 0, 0, 0.713)
+      );
+    color: white; 
+    border: none; 
+    padding: 10px 25px;
+    border-radius: 5px; 
+}
+.btn:active{ 
+    transform: scale(0.9);
+    box-shadow: inset;
+}
+
+.btn1 {
+    background-color: rgba(65, 95, 161, 0.753);
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Para que el botón se comporte como un elemento de bloque */
+
+    padding: 0.3rem 0.5rem ; /* Márgenes */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 0.2rem; /* Bordes redondeados */
+  }
+.btn1:disabled{
+    background-color: rgba(171, 187, 219, 0.753);
+}
+/**formulario de registro**/
+.contenedor-N2{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.contenedor-Formulario{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 3rem
+}
+
+.seccionFormulario {
+    width: 100%;
+    border: none;
+    border-top: 2px solid transparent; /* Borde transparente */
+    border-image: linear-gradient(45deg, rgb(168, 173, 223), rgba(31, 31, 46, 0.562)) 1; /* Degradado */
+    background-color: #2a3f501a;
+}
+.lineaFormulario{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex: 0 0 calc(90%-10px);
+}
+.itemFormulario{
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 calc(23.33% - 14px);
+}
+
+.entradaFormulario{
+    border: none;
+    border-bottom: 2px solid transparent; /* Borde transparente */
+    border-image: linear-gradient(45deg, rgb(168, 173, 223), rgba(31, 31, 46, 0.562)) 1; /* Degradado de rojo a azul */
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.contenedor-Formulario-Btn{
+    display: flex;
+
+    justify-content: end;
+    border-top: none;
+}
+.iconoInput{
+    display: flex;
+    flex-direction: row;
+
+}
+
+fieldset .input2{
+    width: 70%;
+    border: none;
+    outline: none;
+    background-color: #2a3f5000;
+    
+}
+
+ input::placeholder
+{
+    color: #18161677;
+    
+}
+
+.selectFormulario{
+    width: 70%;
+    appearance: none;
+    border: none;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgba(17, 22, 34, 0.874); 
+    background-color: #2a3f5000;
+}
+.alerta{
+    color: #f53527b4;
+}
+
+legend, label{
+    /*background: linear-gradient(to right, rgb(12, 10, 10), rgba(25, 46, 83, 0.897));  Degradado de rojo a amarillo */
+  /*-webkit-background-clip: text;  Para navegadores WebKit */
+  /*background-clip: text;  Para navegadores modernos */
+  color: rgba(17, 22, 34, 0.874); 
+
+}
+
+
+/**listar**/
+.contenedor-N2-Fila {
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    min-height: 80vh;
+}
+
+.titulo-N2 {
+    width: 96%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+.mat-header-cell {
+    background: linear-gradient(
+      to bottom,
+      rgba(13, 52, 150, 0.692),
+      rgba(0, 0, 0, 0.394)
+    );
+    color: aliceblue;
+  
+    text-align: left;
+    font-size: 13px;
+}
+/**tablas**/
+.demo-table {
+    width: 80%;
+}
+
+.tablaPaginador{
+    width: 100%;
+}
+.mat-row:hover {
+    cursor: pointer;
+    background-color: #9a9da3b4;
+}
+
+
+
+.mat-header-cell {
+    background: linear-gradient(
+      to bottom,
+      rgba(13, 52, 150, 0.692),
+      rgba(0, 0, 0, 0.394)
+    );
+    color: aliceblue;
+  
+    text-align: left;
+    font-size: 13px;
+}
+/*tabla buena*/
+.tabla-N2{
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;       
+    background: #ffffff;
+    width: 80%;
+    box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.404);
+}
+.tabla-N2 th,td{
+    border-bottom:1px  solid #f2f2f2; ;
+    border-top: 1px solid #f2f2f2;;
+    padding: 0.2rem;
+    font-size: 0.8rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+
+.tabla-N2 tr:hover {
+    cursor: pointer;
+    background-color: #9a9da3b4;
+}
+th{
+    font-family: Arial, Helvetica, sans-serif;  
+    text-align: left;
+    background: linear-gradient(
+      to bottom,
+      rgba(13, 52, 150, 0.897),
+      rgba(0, 0, 0, 0.418)
+    );
+    color: rgb(245, 241, 241);
+}
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+/**filtros**/
+.contenedor-tablaFiltros{
+    display: flex;
+    flex-direction: row;
+}
+  
+.entradaFiltros {
+    transform: translateX(-300px);
+    transition: transform 1.4s ease, width 1.4s ease;
+    background: rgb(153, 103, 201);
+    width: 0;
+    height: 0;
+}
+.entradaFiltros.open {
+    transform: translateX(0);
+    width: 200px;
+    background: rgb(153, 103, 201);
+}
+

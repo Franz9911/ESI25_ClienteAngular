@@ -1,0 +1,67 @@
+<div class="contenedor-N2-Fila">
+    <div class="titulo-N2" >
+        <h2>Lista de Personas</h2>
+        <div>
+            <button class="btn1 btn" (click)="personaRegist()">Nueva Persona</button>
+        </div>
+    </div>
+    <div class="contenedor-tablaFiltros">
+        <div>
+            <div class="summary" (click)="toggle()"> 
+                <span style="display:inline-flex;"> 
+                    <strong>Buscar</strong>
+                    <mat-icon>{{ isOpen ? 'cancel' : 'search' }}</mat-icon>
+                </span>
+            </div>
+            <div class="entradaFiltros" [ngClass]="{ 'open': isOpen, 'closed': !isOpen }">
+              nombre <input type="text" >
+              apellidos <input type="text" >
+              estado <input type="text" ><br>
+              rol <br> <input type="text" ><br>
+              inicio <br><input type="date" ><br>
+              fin <br><input type="date" >
+              <button (click)="buscar()">buscar</button>
+            </div>           
+        </div>
+        <div class="tablaPaginador">
+            <table class="tabla-N2">
+                <thead >
+                  <tr >
+                    <th>Nombre</th>
+                    <th>Apellido/s</th>
+                    <th>Tipo</th>
+                    <th># Documento</th>
+                    <th>Celular</th>
+                    <th>Direccion</th>
+                    <th>Fecha de Registro</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody >
+                  <tr *ngFor="let persona of personas">
+                    <td>{{ persona.nombre }}</td>
+                    <td>{{ persona.apellidos }}</td>
+                    <td>{{ persona.tipoDoc}}</td>
+                    <td>{{ persona.numDoc}}</td>
+                    <td>{{ persona.celular}}</td>
+                    <td>{{ persona.direccion}}</td>
+                    <td>{{persona.fechaReg |date:'dd/mm/yyyy'}}</td>
+                    <td> 
+                      <mat-icon class="icono">settings</mat-icon>
+                      <mat-icon class="icono">cancel</mat-icon>
+                    </td>
+                  </tr>
+                </tbody>
+               </table>
+            <app-paginador
+                [totalItems]="totalItems"
+                [itemsPerPage]="datosporPagina"
+                [currentPage]="paginaActual"
+                [totalPages]="totalPaginas"
+                (pageChange)="cambiarPagina($event)"
+                (itemsPerPageChange)="cambiarDatosporPagina($event)">
+            </app-paginador>
+        </div>        
+    </div>
+
+</div>

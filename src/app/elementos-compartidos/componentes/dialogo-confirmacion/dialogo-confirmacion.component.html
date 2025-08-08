@@ -1,0 +1,25 @@
+<div class="conten">
+  <div class="titulo">
+    <div>
+      <h2 class="txtBlanco">{{ data.titulo }}</h2>
+      <p class="txtBlanco">{{ data.mensaje }}</p>
+    </div>
+    <div>
+      <button class="btn1 cancelarBtn" (click)="cancelar()">
+        X
+      </button>
+    </div>
+  </div>
+<mat-dialog-content>
+  <div style="white-space: pre-line;">{{ data.datos }}</div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  
+  <button class="btn1 btn" (click)="aceptar()">
+    {{ data.textoAceptar || 'Aceptar' }}
+  </button>
+
+</mat-dialog-actions>
+</div>

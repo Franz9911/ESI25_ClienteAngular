@@ -1,0 +1,66 @@
+.titulo{    
+    width: 100%-0.4rem;
+    padding: 0.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: linear-gradient( 10deg,
+    rgba(32, 30, 67, 0.945) 50%,
+    rgba(88, 96, 110, 0.733)
+    );  
+    color: #ffffffe3;
+}
+.conten{
+    margin:4px;
+    color: rgba(28, 31, 56, 0.897);
+    background: linear-gradient( 40deg,
+        rgba(252, 255, 254, 0.795),
+        rgba(77, 119, 134, 0.719)
+    );
+    
+    
+}
+.cancelarBtn{
+    background-color: rgba(250, 45, 9, 0.815);
+    text-align: center; 
+}
+/* Esto elimina el margen del contenedor */
+::ng-deep .mat-dialog-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    background: #f0eeeea6;
+}
+.formGrid{
+    display: grid;
+    grid-template-columns:20% 30% 30%;
+    column-gap: 1rem;
+    row-gap: 1rem;
+    align-items: center;
+    padding-left: 0.5rem;
+    
+}
+.row2{
+    grid-column: span 2;
+    width: 100%;
+}
+.row3{
+    grid-column: span 3;
+    width: 100%;
+    color: rgba(240, 15, 15, 0.678);
+}
+input, select{
+    appearance: none;
+    background: none;
+   border: none;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    text-align:center;
+}
+.margen{
+    border-radius: 0.5rem;
+    border: 1px solid rgba(27, 26, 27, 0.514);
+    height: 30px;
+    width: 100%;
+}

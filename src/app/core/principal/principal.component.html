@@ -1,0 +1,128 @@
+<div class="container">
+    <div class="header">
+        <div class="app-name">
+          <h1 class="txtBlanco">ESITech</h1>
+        </div>
+
+        <div class="datosUsuario">
+          <div class="">
+            <abbr title="ver el carrito cliente">
+                <mat-icon class="icono">shopping_cart</mat-icon> 
+            </abbr>    
+          </div>
+          <div class=""> 
+            <abbr title="ver carrito ESI">
+                <mat-icon class="icono">local_shipping</mat-icon>
+            </abbr>
+          </div>
+          <div class="userImg">  
+            <details close>
+              <summary>
+                  <img src="assets/kuma2.avif">
+              </summary>
+              <div class="menuImg">
+                  <a >editar</a>
+                  <br>
+                  <a (click)="cerrarSecion(3)">Cerrar sesion</a>
+              </div>
+              
+            </details>   
+          </div>
+          <div class="userAction">
+            <a class="txtBlanco">Usuario: {{nombreU}}</a>
+            <br>
+            <a class="txtBlanco">Rol: {{rol}}</a> 
+          </div>
+        </div>
+    </div>
+    <!--fin de la cabezera-->
+    <!--menu-->
+        <nav >
+           <div class="menu">
+              <ul >
+                 <li class="nav-item">
+                    <a class="nav-link" >Personas</a>
+                    <ul>
+                        <li><a href="#" [routerLink]="['/Esi/persona/listar']">Listar de Personas</a></li>            
+                    </ul>
+                 </li>
+              
+                 <!--usuario-->
+                 <li class="nav-item">
+                    <a class="nav-link" >Usuario</a>
+                    <ul>
+                        <li><a href="#" [routerLink]="['/Esi/usuario/registrar']">Registrar Usuario</a></li>
+                        <li><a href="#" [routerLink]="['/Esi/usuario/listar']">Listar Usuario</a></li>  
+                          
+                    </ul>
+                 </li>
+                 <!--fin usuario-->
+  
+                 <!--venta-->
+                 <li class="nav-item">
+                    <a class="nav-link" >Venta</a>
+                    
+                    <ul>
+                        
+                        <li><a >Registro</a></li>
+                    </ul>
+                 </li>
+                 <!--fin venta-->
+                 <!--lote-->
+                 <li class="nav-item">
+                    <a class="nav-link" >Lotes de Productos</a>
+                    <ul>
+                        <li><a href="#" [routerLink]="['/EsiTech/lote/registrar']">Registrar Lote</a></li> 
+                        <li><a href="#" [routerLink]="['/EsiTech/lote/listar']">Listar Lotes</a></li>   
+                    </ul>
+                 </li>
+                 <!--fin lote-->
+                 <!--compras-->
+                 <li class="nav-item">
+                    <a class="nav-link" >Compras</a>
+                    <ul>
+                        <li><a href="#" [routerLink]="['/EsiTech/compra/registrar']">Registrar Compra</a></li>
+                        <li><a href="#" [routerLink]="['/EsiTech/compra/listar']">Listar Compras</a></li>     
+                    </ul>
+                 </li>
+                 <!--fin compras-->
+                 <li class="nav-item">
+                    <a class="nav-link" >Proveedor</a>
+                    <ul>
+                        <li><a href="#" [routerLink]="['/EsiTech/proveedor/registrar']">Registrar Proveedor</a></li>    
+                    </ul>
+                 </li>
+                 <!--fin proveedor-->
+                 <li class="nav-item d_none">
+                    <a class="nav-link" >clientes</a>
+                    <ul>
+                        <li><a href="#" [routerLink]="['/EsiTech/cliente/registrar']">Registrar Cliente</a></li>
+                        <li><a href="#" [routerLink]="['/EsiTech/cliente/listar']">Listar Clientes</a></li>
+  
+                    </ul>
+                 </li>
+                 <!--fin clientes-->
+                 <li class="nav-item d_none sea_icon">
+                    
+                    <a class="nav-link" href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i><i class="fa fa-search" aria-hidden="true"></i></a>
+                 </li>
+              </ul>
+           </div>
+        </nav>
+    
+      <!--fin menu-->
+    
+    <div >
+      <router-outlet class="contenidoDinamico">
+      </router-outlet>
+    </div>
+  
+    <div class="footer">
+        <div class="contenidoFooter">
+           <p class="txtBlanco">&copy; 2025 Derechos de autor</p> 
+        </div>
+        <div class="contenidoFooter"> 
+            <p class="txtBlanco">Sólo para propósitos educativos</p> 
+        </div>
+    </div>
+</div>

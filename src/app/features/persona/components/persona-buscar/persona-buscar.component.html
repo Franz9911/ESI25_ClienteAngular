@@ -1,0 +1,54 @@
+<div class="conten">
+    <div class="titulo">
+      <div>
+        <h2 class="txtBlanco">{{ data.titulo }}</h2>
+       <p class="txtBlanco">{{ data.mensaje }}</p>
+      </div>
+      <div>
+        <button class="btn1 cancelarBtn" (click)="btnCancelar()">
+          X
+        </button>
+      </div>
+    </div>
+  
+    <mat-dialog-content>
+      <div class="buscador">
+        <div>Nombre <input type="text"  [(ngModel)]="buscarNombre" placeholder="Buscar nombre"></div>
+        <div>Apellidos <input type="text" [(ngModel)]="buscarApellidos" placeholder="Buscar apellido"> &nbsp;</div>      
+        <button class="btn1 btn" (click)="buscarPersonaSinUsuario()">Buscar</button>
+      </div>
+      
+      <div>
+        <table class="tablaBuscar">
+          <thead >
+            <tr >
+              <th>Nombre</th>
+              <th>Apellido/s</th>
+              <th>Documento</th>
+              <th>Seleccionar</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor="let persona of personas">
+              <td>{{ persona.nombre }}</td>
+              <td>{{ persona.apellidos }}</td>
+              <td>{{ persona.tipoDoc}}: {{ persona.numDoc}}</td>
+              <td> <button (click)="btnAceptar(persona)">{{ data.textoAceptar || 'Aceptar' }}</button></td>
+            </tr>
+          </tbody>
+         </table>
+         <div class="paginar">
+          <button class="btn1 " (click)="cambiarPagina(paginaActual-1)" [disabled]="paginaActual<=1">Anterior</button>
+          {{paginaActual}} de {{totalPaginas}}
+          <button class="btn1" (click)="cambiarPagina(paginaActual+1)" [disabled]="paginaActual>=totalPaginas">Siguiente</button>
+         </div>
+      </div>    
+    </mat-dialog-content>
+    <br>
+
+  <mat-dialog-actions align="end">
+
+  </mat-dialog-actions>
+</div>
+  
+  

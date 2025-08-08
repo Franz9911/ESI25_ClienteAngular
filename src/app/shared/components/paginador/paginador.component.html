@@ -1,0 +1,25 @@
+<div class="conteinerPaginador">
+  <button (click)="cambiarPagina(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>  
+  <div class="contenidoPaginador">  
+    <button (click)="irAPagina()" [disabled]="paginaAux<1 || paginaAux>totalPages || !paginaAux">ir a</button>
+    <div class="contenedorEntrada">
+      &nbsp;   
+      <input placeholder="#pagina" class="inputPagina" type="number"[(ngModel)]="paginaAux" > 
+    </div>
+  </div>
+  <button (click)="cambiarPagina(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+  <!--fila 2--> 
+  <div class="contenidoPaginador item3">
+    <label>pagina: {{currentPage}} de {{totalPages}}</label> 
+    <div class="contenedorEntrada">
+      <label>
+        Mostrar:
+        <select class="selectPaginador" [(ngModel)]="itemsPerPage" (change)="cambiarDatosporPagina()">
+          <option [value]=5>5</option>
+          <option [value]=10>10</option>
+          <option [value]=15>15</option>
+        </select>
+      </label>    
+    </div> 
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div class="contenedor-N2-Fila">
+    <div class="titulo-N2">
+        <h2>Registro de Usuarios</h2>
+        <div>
+            <button class="btn1 btn" mat-button (click)="personaNueva()">nueva persona</button> 
+            &nbsp;
+            <button class="btn1 btn" mat-button (click)="BuscarPersonaSinUsuario()">Buscar persona</button>
+        </div>
+        
+    </div>
+    <div class="contenedor-Formulario">
+        <form>
+            <fieldset class="seccionFormulario" [hidden]="!usuario.persona.nombre">
+                <legend>
+                    <h3>{{usuario.persona.nombre}} {{usuario.persona.apellidos}}</h3>
+                </legend>
+                <div class="lineaFormulario">
+                        <div class="itemFormulario">
+                            <fieldset class="entradaFormulario">
+                                <label >Documento</label>
+                                <div class="iconoInput">
+                                    <mat-icon>account_box</mat-icon>
+                                    <label for="">{{usuario.persona.tipoDoc}} {{usuario.persona.numDoc}}</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="itemFormulario">
+                            <fieldset class="entradaFormulario">
+                                <label >Celular</label>
+                                <div class="iconoInput">
+                                    <mat-icon>phone_android</mat-icon>
+                                    <label for="">{{usuario.persona.celular}}</label>
+                                </div>
+                            </fieldset>                         
+                        </div>
+                        <div class="itemFormulario">
+                            <fieldset class="entradaFormulario">
+                                <label >Direccion</label>
+                                <div class="iconoInput">
+                                    <mat-icon>location_on</mat-icon>
+                                    <label for="">{{usuario.persona.direccion}}</label>
+                                </div>
+                            </fieldset>                         
+                        </div>                    
+                </div>
+   
+            </fieldset>
+            <fieldset class="seccionFormulario">
+                <legend>
+                    <h3>Datos del Usuario</h3>
+                </legend>
+                <div class="lineaFormulario">
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label >Nombre de Usuario</label>
+                            <div class="iconoInput">
+                                <mat-icon>account_box</mat-icon>
+                                <input autocomplete="off" type="text" name="nombreU" [(ngModel)]="usuario.nombreU" class="input2" #nombreU="ngModel" (change)="validarNomUsuario()">   
+                            </div>
+                        </fieldset>
+                        <p *ngIf="!respuestaNomUsu.validacion && nombreU.touched" class="alerta" >El nombre de usuario {{respuestaNomUsu.mensaje}}</p>
+                    </div>
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label >contraseña</label>
+                            <div class="iconoInput">
+                                <mat-icon>password</mat-icon>
+                                <input type="text" name="contrasenha" [(ngModel)]="usuario.contrasenha" class="input2" #contrasenha="ngModel" (change)="validarContrasenhaSegura()">    
+                            </div>
+                        </fieldset>
+                        <p *ngIf="!respuestaContr.validacion && contrasenha.touched" class="alerta" >La contraseña {{respuestaContr.mensaje}}</p>
+                    </div>
+                </div>
+                <div class="lineaFormulario">
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label >Rol</label>
+                            <div class="iconoInput">
+                                <mat-icon>plumbing</mat-icon>                            
+                                <select class="selectFormulario" name="rol" [(ngModel)]="usuario.rol"  #rol="ngModel"  (change)="validarRol()">
+                                    <option value="" disabled >--Seleccione un rol--</option>
+                                    <option value="ResV">Resp. de ventas</option>
+                                    <option value="SerT">Serv. Técnico</option>
+                                    <option value="Admi">Administrador</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <p *ngIf="!respuestaRol.validacion && rol.touched" class="alerta" > {{respuestaRol.mensaje}}</p>
+                    </div>
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label >Estado</label>
+                            <div class="iconoInput">
+                                <mat-icon>toggle_on</mat-icon>
+                                <select class="selectFormulario" name="estado" [(ngModel)]="usuario.estado"  #estado="ngModel"  >
+                                    <option value="" disabled >--Seleccione el Estado--</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>                                 
+                                </select>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="seccionFormulario">
+                <legend><h3>Datos de Contacto</h3></legend>
+                <div class="lineaFormulario">
+
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label>Correo Electrónico</label>
+                            <div class="iconoInput">
+                                <mat-icon>alternate_email</mat-icon>
+                                <input type="text" name="correo" [(ngModel)]="usuario.correo" class="input2" (change)="validarCorreoE()" #correo="ngModel">
+                            </div>
+                        </fieldset>
+                        <p *ngIf="!respuestaCorreoE.validacion && correo.touched" class="alerta" >El Correo {{respuestaCorreoE.mensaje}}</p>
+                    </div>
+                </div>
+
+            </fieldset>
+            <fieldset class="seccionFormulario contenedor-Formulario-Btn">
+                    <button class="btn1 btn" type="submit" (click)="procesar()">entrale!!</button>
+                    &nbsp;
+                    <button class="btn1 btn" >Cancelar</button>
+            </fieldset>
+
+        </form>  
+    </div>
+</div>
+
+    
+
+
+
+
+
+
+
