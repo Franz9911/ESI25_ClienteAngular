@@ -319,3 +319,19 @@ tr:nth-child(even){
     background: rgb(153, 103, 201);
 }
 
+ 
+  
+.mi_snackbar {
+    background-color: #81ce83; /* Verde */
+    color: #000;
+    border-radius: 8px;
+}
+.mi_snackbar_error {
+    background-color: #e44720d5; /* Verde */
+    color: #000000;
+    font-size: larger;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+

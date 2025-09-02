@@ -1,0 +1,169 @@
+<div class="contenedor-N2-Fila">
+    <div class="titulo-N2">
+        <h2> Registrar Producto</h2>
+        <div>
+            <button class="btn1 btn" mat-button >nueva persona</button> 
+            &nbsp;
+            <button class="btn1 btn" mat-button >Buscar persona</button>
+        </div>
+    </div>
+    <div class="contenedor-Formulario">
+        <form action="">
+            <fieldset class="seccionFormulario">
+                <legend>
+                    <h3>Especificacion del Producto</h3>
+                </legend>
+                <div class="lineaFormulario">
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label for="">Modelo</label>
+                            <div class="iconoInput">
+                                
+                                <input name="modelo" class="input2" [(ngModel)]="producto.modelo">
+                            </div>
+                        </fieldset>
+                        <p *ngIf="!respModelo.validacion" class="alerta" >
+                            {{respModelo.mensaje}}
+                        </p>
+                    </div>
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label for="">Marca</label>
+                            <div class="iconoInput">
+                                <div class="custom-select">
+                                    <input type="text" (input)="buscarMarca()"
+                                    name="marca2" class="selectFormulario"
+                                    placeholder="Seleccione una marca" 
+                                    [(ngModel)]="producto.marcaNombre" 
+                                    (focus)="mostrarLista = true" 
+                                    (blur)="ocultarLista()" />
+                       
+                             <div class="itemsList" *ngIf="mostrarLista">
+                               <ul>
+                                 <li *ngFor="let marca of marcas" 
+                                     (mousedown)="seleccionarMarca(marca)" 
+                                     class="marcaItem">
+                                   {{marca.nombre}}
+                                 </li>
+                               </ul>
+                                    
+                                </div>
+                                </div>
+                                
+                                <!--<select name="marca" id="" class="selectFormulario" [(ngModel)]="producto.marcaId" >
+                                    <option value="">Seleccine una opcion</option>
+                                    <option [value]="marca.id" *ngFor="let marca of marcas" >{{marca.nombre}}</option>
+                                </select>-->
+                              
+                            </div>
+                        </fieldset>
+                        <p *ngIf="!respMarca.validacion" class="alerta" >
+                            {{respMarca.mensaje}}
+                        </p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="seccionFormulario">
+                <legend>
+                    <h3> Niveles de Almacenamiento</h3>
+                </legend>
+                <div class="lineaFormulario">
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label for="">unidades  Diponibles</label>
+                            <div class="iconoInput">
+                                
+                                <input readonly name="unidadesDis" type="number" class="input2" [(ngModel)]="producto.unidadesDis">
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label for="">nivel minino</label>
+                            <div class="iconoInput">
+                                
+                                <input name="minUnidades" [(ngModel)]="producto.minUnidades" type="number" class="input2">
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="seccionFormulario">
+                <legend>
+                    <h3>Propósito del Producto</h3>
+                </legend>
+                <div class="lineaFormulario">
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label for="">Habilitar para venta</label>
+                            <div class="iconoInput">
+                  
+                                <select name="habilitarVenta" [(ngModel)]="producto.habilitarVenta" id="" class="selectFormulario" >
+                                    <option disabled value="">Seleccione una opcion</option>
+                                    <option value="si">Si</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <p *ngIf="!respHabilitarVenta.validacion" class="alerta" >
+                            {{respHabilitarVenta.mensaje}}
+                        </p>
+                    </div>
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label for="">Habilitar como Refaccion</label>
+                            <div class="iconoInput">
+                                
+                                <select name="habilitarRefac" [(ngModel)]="producto.habilitarRefac" id="" class="selectFormulario" >
+                                    <option disabled value="">Seleccione una opcion</option>
+                                    <option value="si">Si</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <p *ngIf="!respHabilitarRefaccion.validacion" class="alerta" >
+                            {{respHabilitarRefaccion.mensaje}}
+                        </p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="seccionFormulario">
+                <legend>
+                    <h3> Descripcion del Producto</h3>
+                </legend>
+                <div class="lineaFormulario">
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label for="">Especificaciones Técnicas</label>
+                            <div class="iconoInput">
+                                
+                                <textarea name="DescripTec" [(ngModel)]="producto.descripTec" cols="90" rows="7" class="input2"></textarea>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="itemFormulario">
+                        <fieldset class="entradaFormulario">
+                            <label for="">Imagen</label>
+                            <div class="iconoInput">
+                                <input #imgInput type="file" accept="image/*" (change)="ImageSeleccinada($event)" hidden>
+                                <div #divImg class="contenedor_img" (click)="seleccinarImg()"
+                                    [style.backgroundImage]="'url(' + imagenSeleccionada + ')'"
+                                    style="min-width: 7.5rem;; height:7rem; border:1px solid #ccc; cursor:pointer; display:flex; align-items:center; justify-content:center; background-size:cover; background-position:center;">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div >
+                </div>
+                <div class="lineaFormulario">
+                    
+
+                </div>
+            </fieldset>
+            <button (click)="imprimir()">imprimir </button>
+        </form>
+    </div>
+
+</div>

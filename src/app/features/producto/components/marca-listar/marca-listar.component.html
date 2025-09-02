@@ -1,0 +1,32 @@
+<div class="contenedor-N2-Fila">
+    <div class="titulo-N2">
+        <h2>Lista de Marcas</h2>
+        <div>
+            <button class="btn1 btn" (click)="crearMarca()">Nueva Marca</button>
+        </div>
+    </div>
+    <div class="contenedor-tablaFiltros">
+        <div class="tablaPaginador"> 
+            <table class="tabla-N2">
+                <thead>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let marca of marcas">
+                        <td>{{marca.nombre}}</td>
+                        <td> <button>eliminar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-paginador
+                [totalItems]="totalItems"
+                [itemsPerPage]="datosporPagina"
+                [currentPage]="paginaActual"
+                [totalPages]="totalPaginas"
+                (pageChange)="cambiarPagina($event)"
+                (itemsPerPageChange)="cambiarDatosporPagina($event)">
+            </app-paginador>
+        </div>
+    </div>
+</div>

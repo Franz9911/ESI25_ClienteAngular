@@ -1,0 +1,62 @@
+<div class="conten">
+    <div class="contenConfir"  *ngIf="mostrarConfirmacion">
+        <p> esta seguro de realizar esta accion!! </p>
+        <div>
+            <button (click)="aceptar()"> si, Guardar cambios </button>  
+            <button (click)="mensajeConfirmacion()">cancelar</button>
+        </div> 
+        
+
+    </div>
+    <div class="titulo">
+        <h2 class="txtBlanco">editar</h2>
+        <div>
+            <button class="btn1 cancelarBtn" (click)="cancelar()" >X</button>
+        </div>
+    </div>
+    <div class="aux">
+        <div class="formGridEditarMiPerfil">
+            <legend *ngIf="!respForm.validacion" class="row3">{{respForm.mensaje}}</legend>
+            <legend *ngIf="!respImagen.validacion" class="row3">{{respImagen.mensaje}}</legend>
+            <label class="row3 subTitulo">Contraseña</label>
+            <label for="">contraseña actual</label>
+            <div class="row2 margen">
+                <input class="inputForulario" type="text" [(ngModel)]="data.contrasenhaActual">
+            </div>
+            <legend class="row3" *ngIf="!respContrasenhaActual.validacion">{{respContrasenhaActual.mensaje}}</legend> 
+            <label for="">
+                nueva contraseña
+            </label>
+            <div class="row2 margen">
+                <input class="inputForulario" type="text" [(ngModel)]="data.nuevaContrasenha">
+            </div>
+            <legend class="row3" *ngIf="!respNuevaContrasenha.validacion">{{respNuevaContrasenha.mensaje}}</legend> 
+
+            <label for="">confirmar contraseña</label>
+            <div class="row2 margen">
+                <input class="inputForulario" type="text" [(ngModel)]="data.repetirContrasenha">
+            </div>
+            <label class="row3 subTitulo">Nombre de usuario </label>
+            <label for="">usuario</label>
+            <div class="row2 margen">
+                <input class="inputForulario" type="text" [(ngModel)]="data.nombreU">
+            </div>
+            <legend class="row3" *ngIf="!respNombreU.validacion">{{respNombreU.mensaje}}</legend> 
+
+        </div>
+        <div #divImg 
+            class="contenedor_img"
+            (click)="seleccionarImg()" 
+            [style.backgroundImage]="'url(' + imagenSeleccionada + ')'"
+            style="width:200px; height:200px; border:1px solid #ccc; cursor:pointer; display:flex; align-items:center; justify-content:center; background-size:cover; background-position:center;">
+            <div class="cubrirImg">
+                <span>Cambiar imagen</span>
+              </div>
+        </div>
+    </div>
+    
+
+    <input #imgInput type="file" accept="image/*" (change)="ImagenSeleccionada($event)" hidden>
+
+    <button (click)="validarDatosForm()" class="btn"> aceptar</button>
+</div>

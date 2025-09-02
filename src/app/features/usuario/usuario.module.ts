@@ -10,11 +10,13 @@ import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PersonaModule } from '../persona/persona.module';
+import { UsuarioEditarMiperfilComponent } from './components/usuario-editar-miperfil/usuario-editar-miperfil.component';
 @NgModule({
   declarations: [
     UsuarioComponent,
     UsuarioListarComponent,
-    UsuarioRegistrarComponent
+    UsuarioRegistrarComponent,
+    UsuarioEditarMiperfilComponent
   ],
   imports: [
     CommonModule, 

@@ -51,7 +51,6 @@
 }
 
 nav {
-    
     background: linear-gradient( 40deg,
     rgba(88, 96, 110, 0.603),    
     rgba(60, 66, 76, 0.61),
@@ -93,8 +92,8 @@ nav li:hover ul {
 }
 
 img{
+    height:3rem;
     clip-path: circle(40%);
-    width: 4rem;
 }
 details >summary{
     list-style: none;

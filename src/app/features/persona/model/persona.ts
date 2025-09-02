@@ -3,8 +3,9 @@ export class Persona{
     nombre!:string;
     apellidos!:string;
     tipoDoc!:string;
-    numDoc!:number;
+    numDoc?:number;
     direccion!:string;
-    celular!:number;
-    fechaReg!:Date;
+    celular?:number;
+    fechaReg?:Date;
+    correoE!:string;
 }

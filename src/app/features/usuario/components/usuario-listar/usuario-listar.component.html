@@ -16,10 +16,10 @@
             <div class="summary" (click)="toggle()"> 
                 <span style="display:inline-flex;"> 
                     <strong>Buscar</strong>
-                    <mat-icon>{{ isOpen ? 'cancel' : 'search' }}</mat-icon>
+                    <mat-icon>{{ mostrarFiltros ? 'cancel' : 'search' }}</mat-icon>
                 </span>
             </div>
-            <div class="entradaFiltros" [ngClass]="{ 'open': isOpen, 'closed': !isOpen }">
+            <div class="entradaFiltros" [ngClass]="{ 'open': mostrarFiltros, 'closed': !mostrarFiltros }">
               nombre <input type="text" [(ngModel)]="nombre">
               apellidos <input type="text" [(ngModel)]="apellidos">
               estado <input type="text" [(ngModel)]="estado"><br>
@@ -31,58 +31,40 @@
             
         </div>
         <div class="tablaPaginador">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" >
-                <!-- Definir las columnas -->
-                <ng-container matColumnDef="nombreU">
-                <th mat-header-cell *matHeaderCellDef> Usuario</th>
-                <td mat-cell *matCellDef="let element" class="filas"> {{element.nombreU}} </td>
-                </ng-container>
-                <ng-container matColumnDef="estado">
-                    <th mat-header-cell *matHeaderCellDef> Estado </th>
-                    <td mat-cell *matCellDef="let element" class="filas"> {{element.estado}} </td>
-                </ng-container>
-                <ng-container matColumnDef="fechaReg">
-                    <th mat-header-cell *matHeaderCellDef> fecha de registro </th>
-                    <td mat-cell *matCellDef="let element" class="filas"> {{element.fechaReg |date:'dd-MM-yyyy'}} </td>
-                </ng-container>
-                <ng-container matColumnDef="Nombre">
-                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                    <td mat-cell *matCellDef="let element" class="filas"> {{element.persona?.nombre|| ''}} </td>
-                </ng-container>
-                <ng-container matColumnDef="apellidos">
-                    <th mat-header-cell *matHeaderCellDef> Apellido </th>
-                    <td mat-cell *matCellDef="let element" class="filas"> {{element.persona?.apellidos || ''}} </td>
-                </ng-container>
-                <ng-container matColumnDef="rol">
-                    <th mat-header-cell *matHeaderCellDef> Rol </th>
-                    <td mat-cell *matCellDef="let element" class="filas"> {{element.rol || ''}} </td>
-                </ng-container>
-                <ng-container matColumnDef="tipoDoc">
-                    <th mat-header-cell *matHeaderCellDef> Tipo </th>
-                    <td mat-cell *matCellDef="let element" class="filas"> {{element.persona?.tipoDoc || ''}} </td>
-                </ng-container>
-                <ng-container matColumnDef="numDoc">
-                    <th mat-header-cell *matHeaderCellDef> # Documento </th>
-                    <td mat-cell *matCellDef="let element" class="filas"> {{element.persona?.numDoc || ''}} </td>
-                </ng-container>
-                <ng-container matColumnDef="acciones">
-                    <th mat-header-cell *matHeaderCellDef> acciones </th>
-                    <td mat-cell *matCellDef="let element" class="filas">
-                        <div class="iconSeg">
-                            <mat-icon class="icono">settings</mat-icon>
-                            <mat-icon class="icono"(click)="ConfirmaEliminarUsuario(element)" >cancel</mat-icon>
-                            <mat-icon class="icono">folder_open</mat-icon>
-                        </div>
-                        
-                    </td>
-                </ng-container>
-            
-            
-                <!-- Cabecera de la tabla -->
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <!-- Filas de la tabla -->
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table> 
+            <table class="tabla-N2">
+                <thead>
+                   <th>Nombre</th>
+                   <th>Apellido/s</th>
+                   <th>Rol</th>
+                   <th>Estado</th>                   
+                   <th>Tipo</th> 
+                   <th># Doc.</th>
+                   <th>Usuario</th>
+                   <th>Fecha Registro</th>
+                   <th>Acciones</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios">
+                        <td>{{usuario.persona.nombre}}</td>
+                        <td>{{usuario.persona.apellidos}}</td>
+                        <td>{{usuario.rol}}</td>
+                        <td>{{usuario.estado}}</td>
+                        <td>{{usuario.persona.tipoDoc}}</td>
+                        <td>{{usuario.persona.numDoc}}</td>
+                        <td>{{usuario.nombreU}}</td>
+                        <td>{{usuario.fechaReg|date:'dd-MM-yyyy'}}</td>
+                        <td>
+                            <div class="iconSeg">
+                                <mat-icon class="icono">settings</mat-icon>
+                                <mat-icon class="icono"(click)="ConfirmaEliminarUsuario(usuario)" >cancel</mat-icon>
+                                <mat-icon class="icono">folder_open</mat-icon>
+                                <button (click)="modificarUsuario(usuario)">modificar</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
             <app-paginador
             [totalItems]="totalItems"
             [itemsPerPage]="datosporPagina"

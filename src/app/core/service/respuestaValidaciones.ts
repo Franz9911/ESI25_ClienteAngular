@@ -1,5 +1,5 @@
 export type RespuestaValidacion={
-    validacion:boolean;
+    validacion?:boolean;
     mensaje:string;
    
 }

@@ -5,8 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { PaginadorComponent } from 'src/app/shared/components/paginador/paginador.component';
 import { DataSource } from '@angular/cdk/collections';
-import { PersonaRegistrarComponent, NuevaPersonaData } from '../persona-registrar/persona-registrar.component';
+import { PersonaRegistrarComponent,  } from '../persona-registrar/persona-registrar.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogoConfirmacionData } from 'src/app/core/model/dialogo-confirmacion.data';
 
 @Component({
   selector: 'app-personas-listar',
@@ -41,8 +42,6 @@ export class PersonasListarComponent implements OnInit {
         this.paginaActual=response.currentPage;
         // calcular el total de paginas
         this.totalPaginas=Math.ceil(response.totalItems/this.datosporPagina);
-      },error(e){
-        console.log(e);
       }
     });
   }
@@ -55,15 +54,15 @@ export class PersonasListarComponent implements OnInit {
   }
   cambiarPagina(pagina:number){
     this.paginaActual=pagina;
-    console.log(pagina);
+    console.log("pagina actual: ",pagina);
     this.buscar();
   }
   personaRegist():void{
-    const data:NuevaPersonaData = {
+    const data:DialogoConfirmacionData = {
       titulo: 'Registrar Persona',
       mensaje: 'Verifica la informacion ingresada antes de registrar a la persona en la DB!!',
       textoAceptar: 'Sí, registrar',
-      textoCancelar: 'Cancelar'
+      datos:"",
     };
     this.personaRegistrar.open(PersonaRegistrarComponent, {
       disableClose: true,
@@ -71,8 +70,7 @@ export class PersonasListarComponent implements OnInit {
       data
     }).afterClosed().subscribe(resultado => {
       if (resultado) {
-        console.log('Usuario eliminado');
-        // ejecutar lógica de eliminación
+        this.buscar();
       } else {
         console.log('Eliminación cancelada');
       }

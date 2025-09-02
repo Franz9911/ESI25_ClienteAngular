@@ -1,0 +1,43 @@
+<h1>Lista de Productos</h1>
+<ul>
+  <li class="booking-card" *ngFor="let producto of productos"
+    [style.background-image]="'url(http://localhost:3000/'+(producto.imagenProd ? producto.imagenProd : 'productos/2025-08-29ac-milan1756426669784.avif') + ')'"
+    > 
+    <!--Inicio tarjeta-->
+    <div class="book-container">
+      <div class="content">
+        <!--<button class="btn">Al carrito</button>-->
+      </div>
+    </div>
+    <div class="informations-container"> <!--cajas de iconos-->
+      <!--Titulo de tarjeta -->  
+      <h2 class="title">{{producto.marca.nombre}} {{producto.modelo}}</h2>
+      <label class="sub-title">Marca: {{producto.marca.nombre}}</label> <br>
+            <label>Modelo: {{producto.modelo}}</label>
+      <div class="more-information"> <!--Mas informacion-->
+        <div class="info-and-date-container">
+          
+          <div class="box info"> <!--cajas de iconos-->
+            <p>{{producto.unidadesDis || 0 }} uds.</p>
+            <p>Disponibilidad</p>
+          </div>
+          <div class="box info">
+            <p>123 Bs.</p>
+            <p>Precio referencial</p>
+          </div>
+          
+        </div>
+        <br>
+        <button class="btn1"> Mas informacion</button> &nbsp;
+        <button class="btn1">Al carrito</button>
+        <p class="disclaimer"> <!--pie de tarjeta-->
+          {{producto.descripTec || ""}} 
+        </p>
+      </div>
+    </div>
+  </li>
+
+
+</ul>
+
+

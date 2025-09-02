@@ -31,14 +31,15 @@ export class LoginComponent implements OnInit {
   //if(response.status==201 ){
   iniciarCesion(){
     this.router.navigate(['/Esi']);
-    this.validarStr.contrasenhaFuerte(this.contrasenha,8,12);
-    this.validarStr.nombreNumCaract(this.nombreU,5,12);
+    this.validarStr.VerificarContrasenhaFuerte(this.contrasenha,8,12);
+    this.validarStr.verificarNombreUsuario(this.nombreU,5,12);
     
     this.loginservice.autenticarUsuario({nombreU:this.nombreU,contrasenha:this.contrasenha}).subscribe({
       next:(response:HttpResponse<any>)=>{
         if(response.status===201){
+          //console.log("respoonse");
           console.log(response);
-          sessionStorage.setItem('access_Token', response.body.accessToken);
+          sessionStorage.setItem('fotografia', response.body.fotografia);
           sessionStorage.setItem('u_id', response.body.u_id);
           sessionStorage.setItem('uname', this.nombreU );
           sessionStorage.setItem('u_r', response.body.u_r );

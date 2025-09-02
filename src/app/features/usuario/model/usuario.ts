@@ -6,7 +6,6 @@ export class Usuario{
     contrasenha!:string;
     rol!:string;
     estado!:string;
-    correo!:string;
     fechaReg!:Date;
     persona!:Persona;
 }

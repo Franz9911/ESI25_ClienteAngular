@@ -18,10 +18,11 @@
           <div class="userImg">  
             <details close>
               <summary>
-                  <img src="assets/kuma2.avif">
+                <!--'http://localhost:3000/usuarios/ac-milan.avif'-->
+                  <img [src]="fotografia">
               </summary>
               <div class="menuImg">
-                  <a >editar</a>
+                  <a (click)="editarMiPerfil()">editar</a>
                   <br>
                   <a (click)="cerrarSecion(3)">Cerrar sesion</a>
               </div>
@@ -60,23 +61,24 @@
   
                  <!--venta-->
                  <li class="nav-item">
-                    <a class="nav-link" >Venta</a>
-                    
+                    <a class="nav-link" >Venta</a>   
                     <ul>
-                        
                         <li><a >Registro</a></li>
                     </ul>
                  </li>
                  <!--fin venta-->
-                 <!--lote-->
+                 <!--producto-->
                  <li class="nav-item">
-                    <a class="nav-link" >Lotes de Productos</a>
-                    <ul>
-                        <li><a href="#" [routerLink]="['/EsiTech/lote/registrar']">Registrar Lote</a></li> 
-                        <li><a href="#" [routerLink]="['/EsiTech/lote/listar']">Listar Lotes</a></li>   
-                    </ul>
-                 </li>
-                 <!--fin lote-->
+                  <a class="nav-link" >Productos</a>
+                  <ul>
+
+                    <li><a href="#" [routerLink]="['/Esi/producto/registrar']">Registrar Producto</a></li> 
+                    <li><a href="#" [routerLink]="['/Esi/producto/listar']">Listar Productos</a></li>
+                    <li><a href="#" [routerLink]="['/Esi/producto/marca/listar']">Marcas</a></li>   
+                  </ul>
+               </li>
+               <!--fin producto-->
+
                  <!--compras-->
                  <li class="nav-item">
                     <a class="nav-link" >Compras</a>

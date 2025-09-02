@@ -1,17 +1,19 @@
+//angular usa por defecto observables 
+//entonces no es necesario usar async await
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource} from '@angular/material/table';
 import { Usuario } from '../../model/usuario';
 import { UsuarioService } from '../../service/usuario.service';
-import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 import * as ExcelJS from 'exceljs';
 import * as FileSaver from 'file-saver';
-// en el componente donde generarás el PDF
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Table } from 'jspdf-autotable';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmacionDialogoD, DialogoConfirmacionComponent } from 'src/app/elementos-compartidos/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import { DialogoConfirmacionData } from 'src/app/core/model/dialogo-confirmacion.data';
+import { DialogoConfirmacionComponent } from 'src/app/elementos-compartidos/componentes/dialogo-confirmacion/dialogo-confirmacion.component';
+import { Router } from '@angular/router';
+import { NotificacionService } from '@validaciones/notificacion.service';
 (pdfMake as any).vfs = pdfFonts.vfs;
 
 @Component({
@@ -20,11 +22,9 @@ import { ConfirmacionDialogoD, DialogoConfirmacionComponent } from 'src/app/elem
   styleUrls: ['./usuario-listar.component.css']
 })
 export class UsuarioListarComponent implements OnInit {
-
-  
   usuarios:Usuario[]=[];
   contenido:string="";
-  isOpen:boolean=false;
+  mostrarFiltros:boolean=false;
   
   nombre?:string|null;
   apellidos?:string;
@@ -38,24 +38,29 @@ export class UsuarioListarComponent implements OnInit {
   datosporPagina:number=5;
   totalPaginas:number=1;
 
-  //tabla
-  displayedColumns: String[]=['Nombre','apellidos','nombreU','rol', 'numDoc', 'tipoDoc',  'estado','fechaReg','acciones']; 
-  dataSource=new MatTableDataSource<Usuario>();
   constructor(
     private usuarioServ:UsuarioService,
     private dialog:MatDialog,
+    private router:Router,
+    private notificacionService:NotificacionService,
   ) { }
   ngOnInit(): void {
     this.buscar();
   }
-
   
   ConfirmaEliminarUsuario(u:any):void{
-    const data :ConfirmacionDialogoD={
+    let datosPersnales;
+    if(!u.persona?.nombre){
+       datosPersnales="";
+    }else{
+      datosPersnales="nombre: "+u.persona.nombre+" "+u.persona.apellidos+"\n "+u.persona.tipoDoc+" : "+u.persona.numDoc+
+      "\n nombre de usuario: "+ u.nombreU+ "\n rol: "+ u.rol;
+    } 
+    
+    const data :DialogoConfirmacionData={
       titulo:"Eliminar usuario",
       mensaje:"Esta seguro de eliminar el registro?",
-      datos:"nombre: "+u.persona.nombre+" "+u.persona.apellidos+"\n "+u.persona.tipoDoc+" : "+u.persona.numDoc+
-      "\n nombre de usuario: "+ u.nombreU+ "\n rol: "+ u.rol,
+      datos:datosPersnales,
       textoAceptar:"Eliminar usuario",
       textoAux:"Eliminar persona y usuario"
     };
@@ -63,68 +68,64 @@ export class UsuarioListarComponent implements OnInit {
       width:'600px',data
     }).afterClosed().subscribe(resultado=>{
       console.log(resultado);
-      if(resultado=="aux"){this.eliminarUsuario(u.id,u.persona.numDoc,0)}
-      if(resultado=="aceptar") this.eliminarUsuario(u.id,u.persona.numDoc,u.persona.id)
+      if(resultado=="aceptar") this.eliminarUsuario(u.id,u.persona.numDoc)
 
       else console.log("cancelado!!!");
     })
   }
 
-  eliminarUsuario(id:number,ci:number,personaId:number) {
-    this.usuarioServ.EliminarUsuario(id,ci,personaId).subscribe({
+  eliminarUsuario(id:number,ci:number) {
+    this.usuarioServ.EliminarUsuario(id,ci).subscribe({
       next: () => {
-        console.log('Usuario eliminado correctamente');
         // Aquí actualiza la lista o la UI según corresponda
-        this.dataSource.data=this.dataSource.data.filter(usua => usua.id !== id);
-      },
-      error: (err) => {
-        console.error('Error al eliminar usuario:', err);
+        this.usuarios=this.usuarios.filter(usua => usua.id !== id);
+        this.notificacionService.notificarExito('Usuario eliminado correctamente!')
       }
     });
   }   
 
+  modificarUsuario(usuario:Usuario){
+    console.log(usuario);
+    this.router.navigate([`/Esi/usuario/editar/${usuario.id}`],{ state: { usuario } });
+  }
+ 
   toggle(){
-    this.isOpen=!this.isOpen;
+    this.mostrarFiltros=!this.mostrarFiltros;
   }
 
   ExportarPdf(){
-    console.log("tratando de imprimir");
-    
+    console.log("tratando de imprimir"); 
     const content: any[] = [];
-
     // Encabezados de la tabla
-const tablaCuerpo: any[] = [
-  [
-    { text: "Nombre", style: "tableHeader" },
-    { text: "Apellidos", style: "tableHeader" },
-    { text: "Documento", style: "tableHeader" },
-    { text: "Tipo", style: "tableHeader" },
-    { text: "Usuario", style: "tableHeader" },
-    { text: "Rol", style: "tableHeader"},
-    { text: "Estado", style: "tableHeader" },
-    { text: "Fecha de registro", style: "tableHeader" },
-  ],
-];
-
-// Agrega los datos de usuarios
-this.dataSource.data.forEach((us) => {
-  if (us) {
-    tablaCuerpo.push([
-      us.persona?.nombre || '',
-      us.persona?.apellidos || '',
-      us.persona?.numDoc || '',
-      us.persona?.tipoDoc || '',
-      us.nombreU || '',
-      us.rol || '',
-      us.estado || '',
-      us.fechaReg || ''
-    ]);
-  }
-});
+    const tablaCuerpo: any[] = [
+      [
+        { text: "Nombre", style: "tableHeader" },
+        { text: "Apellidos", style: "tableHeader" },
+        { text: "Documento", style: "tableHeader" },
+        { text: "Tipo", style: "tableHeader" },
+        { text: "Usuario", style: "tableHeader" },
+        { text: "Rol", style: "tableHeader"},
+        { text: "Estado", style: "tableHeader" },
+        { text: "Fecha de registro", style: "tableHeader" },
+      ],
+    ];
+    // Agrega los datos de usuarios
+    this.usuarios.forEach((us) => {
+      if (us) {
+        tablaCuerpo.push([
+          us.persona?.nombre || '',
+          us.persona?.apellidos || '',
+          us.persona?.numDoc || '',
+          us.persona?.tipoDoc || '',
+          us.nombreU || '',
+          us.rol || '',
+          us.estado || '',
+          us.fechaReg || ''
+        ]);
+      }
+    });
     console.log(tablaCuerpo);
     content.push({ text: "\n" });
-
-
     content.push({
       table: {
         headerRows: 1,
@@ -155,25 +156,18 @@ this.dataSource.data.forEach((us) => {
         bold: true,
       },
     };
-  
-  
     const docDefinition: any = {
       content,
       styles,
     };
-  
     try{
       pdfMake.createPdf(docDefinition).open();
     }catch(e){
-      throw (
-        console.log(e)
-      )
-      
+      throw (console.log(e))     
     }
-    
-
   }
-  async exportarExcel(){
+
+  exportarExcel(){
     console.log("tratando de exportar excel");
     const workbook= new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('usuarios');
@@ -186,8 +180,7 @@ this.dataSource.data.forEach((us) => {
       { header: 'Usuario', key: 'usuario', width: 20 },
       { header: 'Estado', key: 'estado', width: 10 }
     ];
-
-    const listaPersonaExcel=this.dataSource.data.map(usuarioAux=>({
+    const listaPersonaExcel=this.usuarios.map(usuarioAux=>({
       nombre:usuarioAux.persona?.nombre || "",
       apellido:usuarioAux.persona?.apellidos || "",
       documento:usuarioAux.persona?.numDoc || "",
@@ -207,9 +200,9 @@ this.dataSource.data.forEach((us) => {
     });
   }
 
-  async buscar(){
-    console.log("buscandote")
-    this.usuarioServ.buscarU({
+  buscar(){
+    console.log("buscandote");
+    this.usuarioServ.buscarUsuarios({
       "fechaInicio":this.fechaInicio,"fechaFin":this.fechaFin,"nombre":this.nombre,
       "apellidos":this.apellidos, "estado":this.estado,"rol":this.rol,"page":this.paginaActual,"limit":this.datosporPagina}).subscribe({
       next:(response:any)=>{
@@ -217,9 +210,7 @@ this.dataSource.data.forEach((us) => {
         this.usuarios=response.data;
         this.totalItems=response.totalItems;
         this.paginaActual=response.currentPage;
-        this.dataSource.data=this.usuarios;
         this.totalPaginas=Math.ceil(response.totalItems/this.datosporPagina);
-        console.log(this.dataSource.data);
       }
     })
   }

@@ -1,0 +1,29 @@
+<div class="conten">
+    <div class="titulo" >
+        <div>
+            <h2 class="txtBlanco">{{data.titulo}}</h2>
+            <p class="txtBlanco" >{{data.mensaje}}</p>
+        </div>
+        <div>
+            <button class="btn1 cancelarBtn2" (click)="Cancelar()">
+                X
+              </button>
+        </div>
+    </div>
+    <br>
+    <div class="formGridRegistro">
+        <label for="">nombre: </label>
+            <div class="row2 margen">
+                <input type="text" class="inputForulario"  name="nombre" [(ngModel)]="nombre" >   
+            </div>
+        <div class="row3" *ngIf="!respuestaNom.validacion"  >
+            {{respuestaNom.mensaje}}
+        </div>
+    </div>
+    <mat-dialog-actions align="end">
+        <button class="btn1" color="primary" (click)="aceptar()">
+          {{ data.textoAceptar || 'Aceptar' }}
+        </button>
+      </mat-dialog-actions>
+            
+</div>

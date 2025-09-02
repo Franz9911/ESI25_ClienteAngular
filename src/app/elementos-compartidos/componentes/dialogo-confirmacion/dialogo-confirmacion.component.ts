@@ -1,13 +1,14 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogoConfirmacionData } from 'src/app/core/model/dialogo-confirmacion.data';
 
-export interface ConfirmacionDialogoD{
+/*export interface ConfirmacionDialogoD{
   titulo:string;
   mensaje:string;
   datos:string;
   textoAceptar?:string;
   textoAux?:string;
-}
+}*/
 
 @Component({
   selector: 'app-dialogo-confirmacion',
@@ -18,7 +19,7 @@ export class DialogoConfirmacionComponent {
 
   constructor(
     public dialogoRef:MatDialogRef<DialogoConfirmacionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:ConfirmacionDialogoD
+    @Inject(MAT_DIALOG_DATA) public data:DialogoConfirmacionData
   ) { }
 
   aceptar(){

@@ -1,8 +1,10 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, filter } from 'rxjs';
 import { Usuario } from '../model/usuario';
 import { environment } from 'src/environments/environment';
+import { RegistrarUsuarioDto } from '../model/registra-usuario.dto';
+import { modificarUsuarioDto } from '../model/modificar-usuario.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +14,8 @@ export class UsuarioService {
   constructor( 
     private http:HttpClient
   ) { }
-  public listarP():Observable<Usuario[]>{
-    console.log("hola desde el servUsario")
-    return this.http.get<Usuario[]>(`${environment.apiUrl}usuario/usuario/usuarios`);
-  }
-  buscarU(datos:any){
-    console.log(datos)
+  buscarUsuarios(datos:any){ //simplificar
+    console.log(datos) 
     const params=new HttpParams();
     const cadena = Object.entries(datos)
       .filter(([_, valor]) => valor !== null && valor !== undefined && valor !== '')
@@ -26,14 +24,11 @@ export class UsuarioService {
       console.log(cadena);
     return this.http.get<Usuario[]>(`${environment.apiUrl}usuario/listar?${cadena}`,{
       withCredentials:true,});
-    //${id}&nombre=${nombre}}
   }
-
-  public registrarUsuario(u:Usuario):Observable<any>{
-    console.log("Entramos al servU");
-    console.log(u);
-    return this.http.post<any>(`${environment.apiUrl}usuario/registrar`,
-    u,{
+//localhost:3000/usuario/buscarUsuarioId/3
+  public buscarUsuarioPorId(id:string){
+    console.log("en serve")
+    return this.http.get<any>(`${environment.apiUrl}usuario/buscarUsuarioId/${id}`,{
       withCredentials:true,
       observe:'response',
       headers: new HttpHeaders({
@@ -41,8 +36,31 @@ export class UsuarioService {
       })
     });
   }
-  public EliminarUsuario(id:number, ci:number,personaId:number):Observable<void>{
-    return this.http.delete<void>(`${environment.apiUrl}usuario/Eliminar/${id}/${ci}/${personaId}`);
+  public registrarUsuario(u:RegistrarUsuarioDto):Observable<HttpResponse <RegistrarUsuarioDto>>{
+    return this.http.post<RegistrarUsuarioDto>(`${environment.apiUrl}usuario/registrar`,
+    u,{
+      withCredentials:true,
+      observe:'response' as const,
+      headers: new HttpHeaders({
+        'content-type':'application/json'
+      })
+    });
+  }
+
+  public modificarUsuarioAdmin(u:modificarUsuarioDto,id:string){
+    console.log("en el servi editando user");
+    return this.http.patch<modificarUsuarioDto>(`${environment.apiUrl}usuario/actualizarUsuario/${id}`,u,{
+      observe:'response'
+    })
+  }
+  public editarMiPerfil(formData:FormData){
+    console.log(formData.get('fotografia'));
+    return this.http.patch<any>(`${environment.apiUrl}usuario/editarMiPerfil`,formData,{
+      observe:'response'
+  });
+}
+  public EliminarUsuario(id:number, ci:number):Observable<void>{
+    return this.http.delete<void>(`${environment.apiUrl}usuario/Eliminar/${id}/${ci}`);
   }
 
 }//fin del service

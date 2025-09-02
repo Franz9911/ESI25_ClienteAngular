@@ -16,7 +16,7 @@ import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { LoginComponent } from './core/login/login.component';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
-
+import { InterceptorError } from './core/interceptors/interceptorError';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,6 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
     PrincipalComponent,
     DialogoConfirmacionComponent,
     LoginComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -42,6 +41,10 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
       provide:HTTP_INTERCEPTORS,
       useClass:TokenInterceptor,
       multi:true,
+    },{
+      provide:HTTP_INTERCEPTORS,
+      useClass:InterceptorError,
+      multi:true
     }
   ],
   bootstrap: [AppComponent]

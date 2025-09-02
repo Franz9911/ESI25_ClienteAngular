@@ -15,30 +15,30 @@
    
   </mat-dialog-content>
   <br>
-  <div class="formGrid">
+  <div class="formGridRegistro">
     <label>Nombre:</label>  
     <div>
       <div class="margen">
-        <input type="text" name="nombre" #nombre="ngModel" placeholder="nombre" [(ngModel)]="persona.nombre" (change)="validarNombre()">
+        <input type="text" class="inputForulario" name="nombre" #nombre="ngModel" placeholder="nombre" [(ngModel)]="persona.nombre">
       </div>
       <label> </label>
     </div>
 
     <div >
       <div class="margen">
-        <input type="text" name="apellido" #apellido="ngModel" placeholder="Apellido/s" [(ngModel)]="persona.apellidos" (change)="validarApellido()">
+        <input class="inputForulario" type="text" name="apellido" #apellido="ngModel" placeholder="Apellido/s" [(ngModel)]="persona.apellidos">
       </div>   
     </div>
-    <div class="row3" *ngIf="!respuestaNom.validacion && nombre.touched">
-      El nombre {{respuestaNom.mensaje}}
+    <div class="row3" *ngIf="!respuestaNom.validacion">
+      {{respuestaNom.mensaje}}
     </div>
-    <div class="row3" *ngIf="!respuestaApe.validacion && apellido.touched">
-      El apellido {{respuestaApe.mensaje}}
+    <div class="row3" *ngIf="!respuestaApe.validacion">
+      {{respuestaApe.mensaje}}
     </div>
     <label for="">Documento: </label>
     <div>
       <div class="margen">
-        <select name="" id="" [(ngModel)]="persona.tipoDoc" (change)="validarDocumento()">
+        <select name="" id="" [(ngModel)]="persona.tipoDoc">
           <option value="ci">ci</option>
           <option value="nit">nit</option>
       </select>
@@ -46,28 +46,36 @@
     </div>
     <div>
       <div class="margen">
-        <input type="number" name="numDoc" #numDoc="ngModel" [(ngModel)]="persona.numDoc" (change)="validarDocumento()">
+        <input type="number" class="inputForulario" name="numDoc" #numDoc="ngModel" [(ngModel)]="persona.numDoc">
       </div>
     </div>
-    <div class="row3" *ngIf="!respuestaDoc.validacion && numDoc.touched">
-      El Documento {{respuestaDoc.mensaje}}
+    <div class="row3" *ngIf="!respuestaDoc.validacion">
+      {{respuestaDoc.mensaje}}
     </div>
     
     <label for="">Celular: </label>
     <div class="row2 margen">
-        <input type="number" name="celular" #celular="ngModel" [(ngModel)]="persona.celular" (change)="validarCelular()">   
+        <input type="number" class="inputForulario" name="celular" #celular="ngModel" [(ngModel)]="persona.celular">   
     </div>
-    <div class="row3" *ngIf="!respuestaCel.validacion && celular.touched"  >
-      El numero {{respuestaCel.mensaje}}
+    <div class="row3" *ngIf="!respuestaCel.validacion"  >
+      {{respuestaCel.mensaje}}
     </div>
+
     <label for="">Direccion: </label>
     <div class="row2 margen">
-        <input type="text" name="direccion" #direccion="ngModel" [(ngModel)]="persona.direccion" (change)="validarDireccion()" >
+        <input type="text" class="inputForulario" name="direccion" #direccion="ngModel" [(ngModel)]="persona.direccion">
     </div>
-    <div class="row3" *ngIf="!respuestaDir.validacion && direccion.touched"  >
-      La direccion {{respuestaDir.mensaje}}
+    <div class="row3" *ngIf="!respuestaDir.validacion"  >
+       {{respuestaDir.mensaje}}
     </div>
-    
+
+    <label for="">Correo Electronico: </label>
+    <div class="row2 margen">
+        <input type="text" class="inputForulario" name="correoE" #correo="ngModel" [(ngModel)]="persona.correoE">
+    </div>
+    <div class="row3" *ngIf="!respuestaCorreoE.validacion"  >
+       {{respuestaCorreoE.mensaje}}
+    </div>
 </div>
 <mat-dialog-actions align="end">
   <button class="btn1" color="primary" (click)="onAceptar()">

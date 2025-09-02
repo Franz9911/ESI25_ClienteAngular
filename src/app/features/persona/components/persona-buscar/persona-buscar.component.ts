@@ -2,18 +2,13 @@ import { Component, Inject, OnInit} from '@angular/core';
 import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Persona } from '../../model/persona';
 import { PersonaService } from '../../service/persona.service';
-import { Observable } from 'rxjs';
+import { DialogoConfirmacionData } from 'src/app/core/model/dialogo-confirmacion.data';
 
-export interface BuscarPersonaData {
-  titulo: string;
-  mensaje: string;
-  textoAceptar?: string;
-  textoCancelar?: string;
-}
 @Component({
   selector: 'app-persona-buscar',
   templateUrl: './persona-buscar.component.html',
-  styleUrls: ['./persona-buscar.component.css']
+  styleUrls: ['./persona-buscar.component.css',
+  '../../../../shared/styles/modalStyle.css',]
 })
 export class PersonaBuscarComponent implements OnInit{
   buscarNombre:string="";
@@ -26,7 +21,7 @@ export class PersonaBuscarComponent implements OnInit{
   constructor(
     public dialogRef:MatDialogRef<PersonaBuscarComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data:BuscarPersonaData,
+    public data:DialogoConfirmacionData,
     private personaService:PersonaService,
   ) { }
     ngOnInit():void{
